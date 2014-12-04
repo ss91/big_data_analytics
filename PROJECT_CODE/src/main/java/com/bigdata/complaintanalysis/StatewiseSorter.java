@@ -1,5 +1,9 @@
 /* This code takes the trimmed dataset with 4 columns and makes new csv files matching the first column - this is like code uploaded
-by avinash except files made dynamically iterating through the entire dataset and adding. Runtime not too bad ~15/20 secs*/
+by avinash except files made dynamically iterating through the entire dataset and adding. Runtime not too bad ~15/20 secs
+
+Can be modified to split into different files based on different paramters by setting the parameter to 1st column in csv and playing
+around with a few lines of code
+*/
 
 package StatewiseSorter;
 
