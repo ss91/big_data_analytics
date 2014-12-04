@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class sorter {
+public class StatewiseSorter {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		File file = new File("/Users/nachirau/Desktop/bigdata proj/Consumer_Complaints.csv");
