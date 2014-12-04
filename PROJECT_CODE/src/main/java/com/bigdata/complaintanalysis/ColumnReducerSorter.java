@@ -24,9 +24,6 @@ import java.io.IOException;
 
 public class ColumnReducerSorter {
 
-	public void Sorter(String inputFile) {
-		
-	}
 	public static void main (String[] args) throws Exception {
 		if (args.length != 2) {
 			System.err.println("ColumnReducerSorter::main(): Arguments: [Input CSV File] [Output Sequence Directory]");
@@ -86,7 +83,5 @@ public class ColumnReducerSorter {
 		reader.close();
 		writer.close();
 		System.out.println("ColumnReducerSorter::main() Reduced " + count + " files to required number of columns ");
-
-		// No we will sort this file based on states:
 	}
 }
