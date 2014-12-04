@@ -5,7 +5,7 @@
  Here we will split into the columns [Product, Complaint ID, Issue, State]
  */
 
-package com.bigdata.consumercomplaint;
+package com.bigdata.complaintanalysis;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

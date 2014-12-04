@@ -51,6 +51,12 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 		<artifactId>mahout-math</artifactId>
 		<version>0.8</version>
 	</dependency>
+        <dependency>
+                <groupId>org.apache.hadoop</groupId>
+                <artifactId>hadoop-core</artifactId>
+                <version>1.2.1</version>
+        </dependency>
+
 </dependencies>
 
 <repositories>

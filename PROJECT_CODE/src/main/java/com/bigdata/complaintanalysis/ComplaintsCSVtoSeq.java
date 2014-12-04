@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.bigdata.consumercomplaint;
+package com.bigdata.complaintanalysis;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -27,23 +27,25 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.SequenceFile;
 import org.apache.hadoop.io.SequenceFile.Writer;
 import org.apache.hadoop.io.Text;
+import org.apache.hadoop.io.Writable;
 
 /*
  http://github.com/avinsrid
- 
+
  Minor Modifications made to the code. We were converting based on TSV by default. This will do the conversion for a CSV to Seq file.
  */
 
 public class  ComplaintsCSVtoSeq {
+
 	public static void main(String args[]) throws Exception {
-		if (args.length != 2) {
+		/*if (args.length != 2) {
 			System.err.println("ComplaintsCSVtoSeq::main(): Arguments: [Input CSV File] [Output Sequence Directory]");
 			return;
-		}
+		}*/
 
 		// We will read the respective input file and output directory given in above arguments by user
-		String inputFile = args[0];
-		String outputDir = args[1];
+		String inputFile = "data/NY.csv";
+		String outputDir = "data/";
 		Configuration configuration = new Configuration();
 		FileSystem fileSystem = FileSystem.get(configuration);
 		Writer writer = new SequenceFile.Writer(fileSystem, configuration, new Path(outputDir + "/chunk-0"),
