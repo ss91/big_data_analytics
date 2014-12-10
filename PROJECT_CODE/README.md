@@ -2,12 +2,19 @@
 CONTENTS OF target/*.jar
 ###################################################################
 com/
+
 com/bigdata/
+
 com/bigdata/complaintanalysis/
+
 com/bigdata/complaintanalysis/ColumnReducer.class
+
 com/bigdata/complaintanalysis/ClassificationAutomator.class
+
 com/bigdata/complaintanalysis/StripColumn.class
+
 com/bigdata/complaintanalysis/ComplaintsCSVtoSeq.class
+
 com/bigdata/complaintanalysis/StatewiseSorter.class
 
 ###################################################################
