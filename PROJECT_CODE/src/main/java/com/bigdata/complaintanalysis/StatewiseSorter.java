@@ -5,7 +5,7 @@ Can be modified to split into different files based on different paramters by se
 around with a few lines of code
 */
 
-package StatewiseSorter;
+package com.bigdata.complaintanalysis;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -21,7 +21,7 @@ import java.util.Scanner;
 public class StatewiseSorter {
 
 	public static void main(String[] args) throws FileNotFoundException {
-		File file = new File("/Users/nachirau/Desktop/bigdata proj/Consumer_Complaints.csv");
+		File file = new File("/home/blitzavi89/BigData_Project/big_data_analytics/PROJECT_CODE/data/SortedData.csv");
 		FileReader fileReader = new FileReader(file);
 		BufferedReader Readline = new BufferedReader(fileReader);
 		String Line, parameter;
@@ -42,7 +42,7 @@ public class StatewiseSorter {
 							
 							System.out.println("No match exists for state :" + parameter + "\nMake new file");
 							states.add(parameter);
-							String path = "/Users/nachirau/Desktop/bigdata proj/sorted/" + parameter+".csv";
+							String path = "/home/blitzavi89/BigData_Project/big_data_analytics/PROJECT_CODE/data/" + parameter+".csv";
 							statefiles.put(parameter, path);
 							writeFile = new FileWriter(path);
 							System.out.println(parameter);
@@ -61,7 +61,9 @@ public class StatewiseSorter {
 				}
 				if(!Flag) writeFile.append("\n");
 			}
-		} catch (IOException e) {
+		} catch (IOException e) 
+		{
+			System.out.println("Error with file");
 			e.printStackTrace();
 		}
 	}

@@ -68,13 +68,13 @@ public class ColumnReducerSorter {
 			String issue = columns[fieldIndex.get("Issue")];
 			String state = columns[fieldIndex.get("State")];
 			try {
+				writer.append(state);
+				writer.append(',');
 				writer.append(product);
 				writer.append(',');
 				writer.append(complaintID);
 				writer.append(',');
 				writer.append(issue);
-				writer.append(',');
-				writer.append(state);
 				writer.append('\n');
 			}
 			catch (IOException e) {System.out.println("ColumnReducerSorter::main(): Error writing File"); }
