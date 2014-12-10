@@ -1,23 +1,4 @@
 ###################################################################
-CONTENTS OF target/*.jar
-==================
-com/
-
-com/bigdata/
-
-com/bigdata/complaintanalysis/
-
-com/bigdata/complaintanalysis/ColumnReducer.class
-
-com/bigdata/complaintanalysis/ClassificationAutomator.class
-
-com/bigdata/complaintanalysis/StripColumn.class
-
-com/bigdata/complaintanalysis/ComplaintsCSVtoSeq.class
-
-com/bigdata/complaintanalysis/StatewiseSorter.class
-
-###################################################################
 COMPILATION INSTRUCTIONS
 ==================
 
@@ -44,6 +25,25 @@ blitzavi89@blitzavi89-Lenovo-Ideapad-Flex-14:~/BigData_Project/PROJECT-FILES$ hd
 Found 1 items
 
 -rw-r--r--   1 blitzavi89 supergroup     803959 2014-12-10 01:51 data/classification/NY/chunk-0
+###################################################################
+CONTENTS OF target/*.jar
+==================
+com/
+
+com/bigdata/
+
+com/bigdata/complaintanalysis/
+
+com/bigdata/complaintanalysis/ColumnReducer.class
+
+com/bigdata/complaintanalysis/ClassificationAutomator.class
+
+com/bigdata/complaintanalysis/StripColumn.class
+
+com/bigdata/complaintanalysis/ComplaintsCSVtoSeq.class
+
+com/bigdata/complaintanalysis/StatewiseSorter.class
+
 
 
  
