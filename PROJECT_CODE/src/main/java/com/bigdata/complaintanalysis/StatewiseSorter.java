@@ -20,8 +20,8 @@ import java.util.Scanner;
 
 public class StatewiseSorter {
 
-	public static void main(String[] args) throws FileNotFoundException {
-		File file = new File("/home/blitzavi89/BigData_Project/big_data_analytics/PROJECT_CODE/data/SortedData.csv");
+	public void sortState(String args1, String args2) throws FileNotFoundException {
+		File file = new File(args1 + "SortedData.csv");
 		FileReader fileReader = new FileReader(file);
 		BufferedReader Readline = new BufferedReader(fileReader);
 		String Line, parameter;
@@ -40,12 +40,12 @@ public class StatewiseSorter {
 						if(writeFile!=null) writeFile.close();
 						if(!statefiles.containsKey(parameter)) {
 							
-							System.out.println("No match exists for state :" + parameter + "\nMake new file");
+							System.out.println("StatewiseSorter::sortState() No match exists for state :" + parameter + "\nMake new file");
 							states.add(parameter);
-							String path = "/home/blitzavi89/BigData_Project/big_data_analytics/PROJECT_CODE/data/" + parameter+".csv";
+							String path = args2 + "temp_" + parameter +".csv";
 							statefiles.put(parameter, path);
 							writeFile = new FileWriter(path);
-							System.out.println(parameter);
+							System.out.println("StatewiseSorter::sortState() No match exists for state :" + parameter);
 						}
 						else {
 							
@@ -63,7 +63,7 @@ public class StatewiseSorter {
 			}
 		} catch (IOException e) 
 		{
-			System.out.println("Error with file");
+			System.out.println("StatewiseSorter::sortState() Error with file");
 			e.printStackTrace();
 		}
 	}

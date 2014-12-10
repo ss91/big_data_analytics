@@ -19,6 +19,7 @@ package com.bigdata.complaintanalysis;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.FileNotFoundException;
 
 // My system uses org.apache.hadoop.fs instead of *.*.*.filesystem
 import org.apache.hadoop.conf.Configuration;
@@ -37,47 +38,52 @@ import org.apache.hadoop.io.Writable;
 
 public class  ComplaintsCSVtoSeq {
 
-	public static void main(String args[]) throws Exception {
-		/*if (args.length != 2) {
-			System.err.println("ComplaintsCSVtoSeq::main(): Arguments: [Input CSV File] [Output Sequence Directory]");
+	public void convertToSeq (String inputPath, String outputPath) throws Exception {
+		if (inputPath == null && outputPath == null) {
+			System.err.println("ComplaintsCSVtoSeq::main(): Don't have input and output paths");
 			return;
-		}*/
+		}
 
 		// We will read the respective input file and output directory given in above arguments by user
-		String inputFile = "data/NY.csv";
-		String outputDir = "data/";
+		String inputFile = inputPath;
+		String outputDir = outputPath;
 		Configuration configuration = new Configuration();
 		FileSystem fileSystem = FileSystem.get(configuration);
 		Writer writer = new SequenceFile.Writer(fileSystem, configuration, new Path(outputDir + "/chunk-0"),
 				Text.class, Text.class);
 		
 		int count = 0;
-		BufferedReader reader = new BufferedReader(new FileReader(inputFile));
 
-		// Text stores text using standard UTF8 encoding
-		Text key = new Text();
-		Text value = new Text();
-		while(true) {
-			String everyLine = reader.readLine();
-			if (everyLine == null) {
-				break;
-			}
+		// We need to catch this exception
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(inputFile));
 
-			// Here, I am splitting the data on a per line basis by commas
-			String[] columns = everyLine.split(",", 3);
-			if (columns.length != 3) {
-				System.out.println("ComplaintsCSVtoSeq::main(): Invalid Line " + everyLine);
+			// Text stores text using standard UTF8 encoding
+			Text key = new Text();
+			Text value = new Text();
+			while(true) {
+				String everyLine = reader.readLine();
+				if (everyLine == null) {
+					break;
+				}
+
+				// Here, I am splitting the data on a per line basis by commas
+				String[] columns = everyLine.split(",", 3);
+				if (columns.length != 3) {
+					System.out.println("ComplaintsCSVtoSeq::main(): Invalid Line " + everyLine);
+				}
+				String productClassified = columns[0];
+				String complaintId = columns[1];
+				String customerIssue = columns[2];
+				key.set("/" + productClassified + "/" + complaintId);
+				value.set(customerIssue);
+				writer.append(key, value);
+				count++;
 			}
-			String productClassified = columns[0];
-			String complaintId = columns[1];
-			String customerIssue = columns[2];
-			key.set("/" + productClassified + "/" + complaintId);
-			value.set(customerIssue);
-			writer.append(key, value);
-			count++;
+			reader.close();
+			writer.close();
+			System.out.println("ComplaintsCSVtoSeq::main(): Wrote " + count + " entries to Seq File.");
 		}
-		reader.close();
-		writer.close();
-		System.out.println("ComplaintsCSVtoSeq::main(): Wrote " + count + " entries to Seq File.");
+		catch(FileNotFoundException fe) { System.err.println("ComplaintsCSVtoSeq::convertToSeq(): File not Found"); }
 	}
 }
