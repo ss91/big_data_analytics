@@ -28,7 +28,7 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.Writable;
 
 public class  ClassificationAutomator {
-	
+
 	public static void main(String[] args) throws Exception {
 
 		// args[] needs to be the input raw data which will go through cleaning phase followed by Mahout classification
@@ -60,6 +60,15 @@ public class  ClassificationAutomator {
 		}
 		stateSorter.sortState(outputDir, outputDir + "states/");
 
+		ColumnReducerBank bankReducer = new ColumnReducerBank();
+		bankReducer.reduceColumn(inputFile, outputDir);
+		File bankDir = new File("data/banks");
+		if (!bankDir.exists()) {
+			bankDir.mkdir();
+		}
+		BankwiseSorter bankSorter = new BankwiseSorter();
+		bankSorter.sortBank(outputDir, outputDir + "banks/");
+
 		// We convert every CSV file into a sequence file by calling ComplaintsCSVtoSeq. We will also iterate over every file under data/states and call
 		// the method convertToSeq(). Before that we need to strip the first column i.e. state of each csv file.
 		ComplaintsCSVtoSeq allComplaints = new ComplaintsCSVtoSeq();
@@ -86,6 +95,7 @@ public class  ClassificationAutomator {
 		Process p = Runtime.getRuntime().exec("hdfs dfs -mkdir /data");
 		p = Runtime.getRuntime().exec("hdfs dfs -put data/states data/");
 		p = Runtime.getRuntime().exec("hdfs dfs -put data/classification data/");
+		p = Runtime.getRuntime().exec("hdfs dfs -put data/banks data/");
 		File[] newDirectoryList = stateDir.listFiles();
 		for (File everyFile : newDirectoryList) {
 			if (everyFile.exists()) {
@@ -95,6 +105,7 @@ public class  ClassificationAutomator {
 				String[] targetFileName = fileName.split("\\.",2);
 				allComplaints.convertToSeq("data/states/" + fileName, mahoutSeqOutput + "classification/" + targetFileName[0]);
 			}
+		allComplaints.convertToSeq("data/banks/Equifax.csv", mahoutSeqOutput + "classification/");
 		}
 	} 
 }
